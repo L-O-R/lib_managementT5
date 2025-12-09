@@ -9,8 +9,48 @@
 </head>
 
 <body>
+    <header class="main_header">
+        <div>
+            <h1>My Library</h1>
+        </div>
+        <nav>
+            <button id="login_btn">
+                Login
+            </button>
 
+            <button id="add_book_btn">Add Books</button>
+        </nav>
+    </header>
+    <main>
+
+    </main>
+    <footer>
+        Made BY LR
+    </footer>
+
+
+    <dialog id="login_modal">
+        <div>
+            <span id="close_modal">X</span>
+            <form id="login_form">
+                <div>
+                    <label for="username">
+                        Username
+                    </label>
+                    <input type="text" placeholder="username">
+                </div>
+                <div>
+                    <label for="password">
+                        Password
+                    </label>
+                    <input type="password" placeholder="password">
+                </div>
+                <button type="submit">Login</button>
+            </form>
+        </div>
+    </dialog>
     <script src="./script/app.js"></script>
+    <script src="./script/loginForm.js"></script>
 </body>
 
 </html>
