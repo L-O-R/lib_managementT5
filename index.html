@@ -14,43 +14,61 @@
             <h1>My Library</h1>
         </div>
         <nav>
-            <button id="login_btn">
-                Login
-            </button>
-
             <button id="add_book_btn">Add Books</button>
         </nav>
     </header>
     <main>
-
+        <section id="root"></section>
     </main>
     <footer>
         Made BY LR
     </footer>
 
 
-    <dialog id="login_modal">
-        <div>
-            <span id="close_modal">X</span>
-            <form id="login_form">
-                <div>
-                    <label for="username">
-                        Username
-                    </label>
-                    <input type="text" placeholder="username">
-                </div>
-                <div>
-                    <label for="password">
-                        Password
-                    </label>
-                    <input type="password" placeholder="password">
-                </div>
-                <button type="submit">Login</button>
-            </form>
-        </div>
+    <dialog id="add_book_modal">
+        <h2>Add Book</h2>
+        <span id="close_modal">X</span>
+        <form id="add_book_form">
+            <div>
+                <label for="book_title">Book Title*</label>
+                <input type="text" name="book_title" id="book_title" required>
+            </div>
+            <div>
+                <label for="book_Author">Book Author*</label>
+                <input type="text" name="book_Author" id="book_Author" required>
+            </div>
+            <div>
+                <label for="book_genre">Genre*</label>
+                <select title="Book Genre " name="book_genre" id="book_genre" required>
+                    <!-- option will be added dynamically from the js -->
+                </select>
+            </div>
+            <div>
+                <label for="book_reading_status">Reading Status*</label>
+                <select title="Book Reading Status" name="book_reading_status" id="book_reading_status">
+                    <option value="">Select Reading Status</option>
+                    <option value="not_started">Not Yet Started</option>
+                    <option value="reading">Reading</option>
+                    <option value="completed">Completed</option>
+                </select>
+            </div>
+            <button id="submit_btn" type="submit">Submit</button>
+        </form>
     </dialog>
-    <script src="./script/app.js"></script>
-    <script src="./script/loginForm.js"></script>
+
+
+    <template id="book_template">
+        <div class="book">
+            <h2 class="book_title"></h2>
+            <h3 class="book_author"></h3>
+            <span class="book_genre"></span>
+            <select name="" id="">
+                <!-- option will added from the js -->
+            </select>
+        </div>
+    </template>
+
+    <script src="./script/app.js" type="module"></script>
 </body>
 
 </html>

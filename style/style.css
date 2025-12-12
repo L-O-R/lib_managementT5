@@ -96,33 +96,33 @@ footer {
 }
 
 /* --- Dialog/Modal Styling --- */
-#login_modal {
+#add_book_modal {
     border: none;
     border-radius: 10px;
-    padding: 2rem;
+    padding: 4rem;
     background-color: var(--color-modal-bg);
     color: var(--color-light-text);
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.7);
-    max-width: 25%;
+    max-width: 30%;
     width: 100%;
     margin: auto;
 }
 
 /* Backdrop styling when modal is open */
-#login_modal::backdrop {
+#add_book_modal::backdrop {
     background: rgba(0, 0, 0, 0.7);
     backdrop-filter: blur(4px);
 }
 
-#login_modal>div {
+#add_book_modal>div {
     position: relative;
 }
 
 /* Close button styling */
 #close_modal {
     position: absolute;
-    top: -1.5rem;
-    right: -1.5rem;
+    top: 1rem;
+    right: 1.5rem;
     cursor: pointer;
     background-color: var(--color-dark-red);
     color: var(--color-light-text);
@@ -143,19 +143,19 @@ footer {
 }
 
 /* --- Form Styling --- */
-#login_form>div {
+#add_book_form>div {
     margin-bottom: 1.5rem;
 }
 
-#login_form label {
+#add_book_form label {
     display: block;
     margin-bottom: 0.5rem;
     font-weight: bold;
     color: var(--color-sunset-gold);
 }
 
-#login_form input[type="text"],
-#login_form input[type="password"] {
+#add_book_form input,
+#add_book_form select {
     width: 100%;
     padding: 0.75rem;
     border: 1px solid var(--color-burnt-orange);
@@ -166,13 +166,13 @@ footer {
     transition: border-color 0.3s;
 }
 
-#login_form input:focus {
+#add_book_form input:focus {
     outline: none;
     border-color: var(--color-sunset-gold);
     box-shadow: 0 0 5px var(--color-sunset-gold);
 }
 
-#login_form button[type="submit"] {
+#add_book_form button {
     width: 100%;
     background-color: var(--color-dark-red);
     color: var(--color-light-text);
@@ -185,7 +185,7 @@ footer {
     transition: background-color 0.3s, transform 0.1s;
 }
 
-#login_form button[type="submit"]:hover {
+#add_book_form button[type="submit"]:hover {
     background-color: var(--color-burnt-orange);
     color: var(--color-dark-bg);
     transform: scale(1.02);
