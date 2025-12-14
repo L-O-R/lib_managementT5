@@ -89,103 +89,29 @@ main {
     /* Grid for displaying books */
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 5rem 2rem;
-    /* Increased vertical gap for 3D books */
-    padding: 3rem 1rem;
-    /* More padding for 3D rotation */
+    gap: 2rem;
+    padding: 1rem;
     max-width: 1200px;
     margin: 0 auto;
-    perspective: 1500px;
-    /* Sets up the 3D viewing perspective for the entire grid */
 }
 
-/* --- 3D Book Card Styling --- */
+/* --- Individual Book Card Styling --- */
 .book {
-    /* The main wrapper for the 3D book effect */
-    position: relative;
-    width: 250px;
-    /* Fixed width for consistent 3D effect */
-    height: 350px;
-    /* Fixed height for consistent 3D effect */
-    margin: 0 auto;
-    transform-style: preserve-3d;
-    /* Key for 3D children */
-    transform: rotateY(0deg);
-    /* Initial state: front-facing */
-    transition: transform 0.6s ease-in-out;
-    cursor: pointer;
-}
-
-.book:hover {
-    /* Rotate the book slightly on hover to expose the spine and thickness */
-    transform: rotateY(-20deg) scale(1.05);
-}
-
-/* The Front Cover (All internal content is styled here) */
-.book>* {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    /* Front Cover Color */
-    background-color: var(--color-dark-red);
-    color: var(--color-light-text);
+    background-color: var(--color-modal-bg);
     padding: 1.5rem;
-    border-radius: 5px;
-    /* Move face forward in Z-space */
-    transform: translateZ(10px);
-    backface-visibility: hidden;
-    border: 3px solid var(--color-sunset-gold);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
-    z-index: 2;
-
-    /* Internal Layout */
+    border-radius: 10px;
+    border: 2px solid var(--color-burnt-orange);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
+    transition: transform 0.2s;
 }
 
-/* 3D Book Spine (The left edge) */
-.book::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 20px;
-    /* Thickness of the spine */
-    height: 100%;
-    /* Spine Color */
-    background-color: var(--color-burnt-orange);
-    transform-origin: left center;
-    /* Rotate 90deg and translate to position it as the spine */
-    transform: rotateY(90deg) translateX(10px) translateZ(-10px);
-    z-index: 1;
-    border-radius: 0 5px 5px 0;
-    box-shadow: -5px 0 10px rgba(0, 0, 0, 0.3);
+.book:hover {
+    transform: translateY(-5px);
 }
-
-/* 3D Book Pages/Thickness (The top edge) */
-.book::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 20px;
-    /* Thickness of the pages/book */
-    /* Pages Color */
-    background-color: var(--color-light-text);
-    transform-origin: 0 0;
-    /* Rotate up and translate to sit on top of the cover */
-    transform: rotateX(90deg) translateY(-10px) translateZ(10px);
-    z-index: 1;
-    border-radius: 5px 5px 0 0;
-    box-shadow: 0 -5px 10px rgba(0, 0, 0, 0.3);
-}
-
-/* --- Internal Content Styles --- */
 
 .book_title {
     font-family: var(--font-halloween);
@@ -205,7 +131,7 @@ main {
 
 .book_genre {
     display: inline-block;
-    background-color: var(--color-burnt-orange);
+    background-color: var(--color-dark-red);
     padding: 0.2rem 0.6rem;
     border-radius: 5px;
     font-size: 0.9rem;
@@ -217,13 +143,12 @@ main {
 .book select {
     background-color: var(--color-dark-bg);
     color: var(--color-light-text);
-    border: 1px solid var(--color-sunset-gold);
+    border: 1px solid var(--color-burnt-orange);
     padding: 0.5rem;
     border-radius: 5px;
     margin-bottom: 1.5rem;
-    width: 90%;
+    width: 100%;
     cursor: pointer;
-    z-index: 3;
 }
 
 /* Delete Button */
@@ -236,14 +161,12 @@ main {
     cursor: pointer;
     font-weight: bold;
     transition: background-color 0.2s;
-    width: 90%;
-    margin-top: auto;
-    z-index: 3;
+    width: 100%;
 }
 
 .book #delete_book:hover {
-    background-color: var(--color-burnt-orange);
-    color: var(--color-dark-bg);
+    background-color: #A52A2A;
+    /* slightly lighter red */
 }
 
 /* --- No Books Message --- */
@@ -263,6 +186,7 @@ footer {
     padding: 1rem 0;
     font-size: 0.8rem;
     border-top: 2px dashed var(--color-dark-red);
+    /* Removed sticky to avoid conflict with main content */
 }
 
 /* --- Dialog/Modal Styling (Add Book) --- */
