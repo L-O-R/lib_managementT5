@@ -30,6 +30,7 @@
 
 body {
     font-family: var(--font-body);
+    /* Gradient background representing a sunset */
     background: linear-gradient(180deg, var(--color-dark-red) 0%, var(--color-burnt-orange) 40%, var(--color-sunset-gold) 100%);
     color: var(--color-light-text);
     min-height: 100vh;
@@ -53,10 +54,11 @@ body {
     font-family: var(--font-halloween);
     font-size: 2.5rem;
     color: var(--color-sunset-gold);
+    /* Halloween title glow */
     text-shadow: 2px 2px 4px var(--color-burnt-orange);
 }
 
-/* --- Button Styling --- */
+/* --- Button Styling (Header) --- */
 nav button {
     background-color: var(--color-burnt-orange);
     color: var(--color-dark-bg);
@@ -76,11 +78,181 @@ nav button:hover {
     transform: scale(1.05);
 }
 
-/* --- Main Content Area --- */
+/* --- Main Content Area and Book Grid --- */
 main {
     flex-grow: 1;
+    /* Makes the main content take up all available space */
     padding: 2rem;
+}
+
+#root {
+    /* Grid for displaying books */
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 5rem 2rem;
+    /* Increased vertical gap for 3D books */
+    padding: 3rem 1rem;
+    /* More padding for 3D rotation */
+    max-width: 1200px;
+    margin: 0 auto;
+    perspective: 1500px;
+    /* Sets up the 3D viewing perspective for the entire grid */
+}
+
+/* --- 3D Book Card Styling --- */
+.book {
+    /* The main wrapper for the 3D book effect */
+    position: relative;
+    width: 250px;
+    /* Fixed width for consistent 3D effect */
+    height: 350px;
+    /* Fixed height for consistent 3D effect */
+    margin: 0 auto;
+    transform-style: preserve-3d;
+    /* Key for 3D children */
+    transform: rotateY(0deg);
+    /* Initial state: front-facing */
+    transition: transform 0.6s ease-in-out;
+    cursor: pointer;
+}
+
+.book:hover {
+    /* Rotate the book slightly on hover to expose the spine and thickness */
+    transform: rotateY(-20deg) scale(1.05);
+}
+
+/* The Front Cover (All internal content is styled here) */
+.book>* {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Front Cover Color */
+    background-color: var(--color-dark-red);
+    color: var(--color-light-text);
+    padding: 1.5rem;
+    border-radius: 5px;
+    /* Move face forward in Z-space */
+    transform: translateZ(10px);
+    backface-visibility: hidden;
+    border: 3px solid var(--color-sunset-gold);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    z-index: 2;
+
+    /* Internal Layout */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     text-align: center;
+}
+
+/* 3D Book Spine (The left edge) */
+.book::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 20px;
+    /* Thickness of the spine */
+    height: 100%;
+    /* Spine Color */
+    background-color: var(--color-burnt-orange);
+    transform-origin: left center;
+    /* Rotate 90deg and translate to position it as the spine */
+    transform: rotateY(90deg) translateX(10px) translateZ(-10px);
+    z-index: 1;
+    border-radius: 0 5px 5px 0;
+    box-shadow: -5px 0 10px rgba(0, 0, 0, 0.3);
+}
+
+/* 3D Book Pages/Thickness (The top edge) */
+.book::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 20px;
+    /* Thickness of the pages/book */
+    /* Pages Color */
+    background-color: var(--color-light-text);
+    transform-origin: 0 0;
+    /* Rotate up and translate to sit on top of the cover */
+    transform: rotateX(90deg) translateY(-10px) translateZ(10px);
+    z-index: 1;
+    border-radius: 5px 5px 0 0;
+    box-shadow: 0 -5px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* --- Internal Content Styles --- */
+
+.book_title {
+    font-family: var(--font-halloween);
+    color: var(--color-sunset-gold);
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+    text-transform: capitalize;
+}
+
+.book_author {
+    font-size: 1.1rem;
+    color: var(--color-light-text);
+    margin-bottom: 0.75rem;
+    font-weight: 400;
+    text-transform: capitalize;
+}
+
+.book_genre {
+    display: inline-block;
+    background-color: var(--color-burnt-orange);
+    padding: 0.2rem 0.6rem;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+    text-transform: capitalize;
+}
+
+/* Status Select Field */
+.book select {
+    background-color: var(--color-dark-bg);
+    color: var(--color-light-text);
+    border: 1px solid var(--color-sunset-gold);
+    padding: 0.5rem;
+    border-radius: 5px;
+    margin-bottom: 1.5rem;
+    width: 90%;
+    cursor: pointer;
+    z-index: 3;
+}
+
+/* Delete Button */
+.book #delete_book {
+    background-color: var(--color-dark-red);
+    color: var(--color-light-text);
+    border: none;
+    padding: 0.7rem 1.5rem;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.2s;
+    width: 90%;
+    margin-top: auto;
+    z-index: 3;
+}
+
+.book #delete_book:hover {
+    background-color: var(--color-burnt-orange);
+    color: var(--color-dark-bg);
+}
+
+/* --- No Books Message --- */
+.no_books {
+    font-family: var(--font-halloween);
+    font-size: 2rem;
+    color: var(--color-sunset-gold);
+    text-align: center;
+    padding: 5rem 0;
 }
 
 /* --- Footer Styling --- */
@@ -91,11 +263,9 @@ footer {
     padding: 1rem 0;
     font-size: 0.8rem;
     border-top: 2px dashed var(--color-dark-red);
-    position: sticky;
-    bottom: 0;
 }
 
-/* --- Dialog/Modal Styling --- */
+/* --- Dialog/Modal Styling (Add Book) --- */
 #add_book_modal {
     border: none;
     border-radius: 10px;
@@ -103,8 +273,8 @@ footer {
     background-color: var(--color-modal-bg);
     color: var(--color-light-text);
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.7);
-    max-width: 30%;
-    width: 100%;
+    max-width: 400px;
+    width: 90%;
     margin: auto;
 }
 
@@ -142,7 +312,7 @@ footer {
     color: var(--color-dark-bg);
 }
 
-/* --- Form Styling --- */
+/* --- Form Styling (Add Book) --- */
 #add_book_form>div {
     margin-bottom: 1.5rem;
 }
@@ -166,7 +336,8 @@ footer {
     transition: border-color 0.3s;
 }
 
-#add_book_form input:focus {
+#add_book_form input:focus,
+#add_book_form select:focus {
     outline: none;
     border-color: var(--color-sunset-gold);
     box-shadow: 0 0 5px var(--color-sunset-gold);
