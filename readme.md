@@ -24,16 +24,15 @@ By studying this codebase, you will solidify your understanding of:
 
 The application logic is neatly separated into the following modules:
 
-| File Name                   | Role / Functionality       | Key Responsibility                                                                                                                                                                      |
-| :-------------------------- | :------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `index.html`                | Markup                     | Defines the overall structure, modals (`<dialog>`), the book `<template>`, and imports all JS modules.                                                                                  |
-| `style.css`                 | Styling                    | Manages the color palette, fonts, layout, and visual appearance of the books and modals.                                                                                                |
-| `app.js`                    | Main Controller            | Initializes the application, loads data from `localStorage`, calls the `add_genre` function, and triggers the initial `renderBook`.                                                     |
-| `Book_class.js`             | Data Model (OOP)           | Defines the blueprint for a `Book` object, containing properties like `title`, `author`, `genre`, and `reading_status`.                                                                 |
-| `add_form.js`               | Create (C)                 | Contains the logic for the "Add Book" form submission, including data validation, creating a new `Book` instance, updating `book_list`, and saving to `localStorage`.                   |
-| `adding_option_to_genre.js` | Utility                    | Provides a list of genres and dynamically populates the genre `<select>` dropdown in the modal form.                                                                                    |
-| `render_book.js`            | Read, Update, Delete (RUD) | Handles the dynamic creation of book cards, appending them to the DOM, and manages the deletion of books and updating their reading status.                                             |
-| `loginForm.js`              | User Authentication        | Handles basic hard-coded user login (`admin`/`admin`) and manages the login state using `localStorage` (though the UI interaction is currently removed in `index.html` for simplicity). |
+| File Name                   | Role / Functionality       | Key Responsibility                                                                                                                                                    |
+| :-------------------------- | :------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `index.html`                | Markup                     | Defines the overall structure, modals (`<dialog>`), the book `<template>`, and imports all JS modules.                                                                |
+| `style.css`                 | Styling                    | Manages the color palette, fonts, layout, and visual appearance of the books and modals.                                                                              |
+| `app.js`                    | Main Controller            | Initializes the application, loads data from `localStorage`, calls the `add_genre` function, and triggers the initial `renderBook`.                                   |
+| `Book_class.js`             | Data Model (OOP)           | Defines the blueprint for a `Book` object, containing properties like `title`, `author`, `genre`, and `reading_status`.                                               |
+| `add_form.js`               | Create (C)                 | Contains the logic for the "Add Book" form submission, including data validation, creating a new `Book` instance, updating `book_list`, and saving to `localStorage`. |
+| `adding_option_to_genre.js` | Utility                    | Provides a list of genres and dynamically populates the genre `<select>` dropdown in the modal form.                                                                  |
+| `render_book.js`            | Read, Update, Delete (RUD) | Handles the dynamic creation of book cards, appending them to the DOM, and manages the deletion of books and updating their reading status.                           |
 
 ---
 
@@ -57,14 +56,6 @@ This module handles form processing and validation.
 - **Duplicate Check:** It uses the `some` array method to ensure no two books have the exact same title before adding.
 - **Instantiation:** A new `Book` object is created using the `Book` class.
 - **Data Persistence:** The new book is added to the `book_list` array using `push`, and the updated array is immediately serialized and stored in `localStorage`.
-
-### 3. `loginForm.js` (Separation of Concerns)
-
-This file isolates the login validation logic.
-
-- **Credentials:** Hard-coded `userName: "admin"` and `password: "admin"`.
-- **Login Check:** The `login_func` compares the form inputs to the stored credentials.
-- **State Management:** On successful login, it sets the `logedIn` flag in `localStorage`.
 
 ---
 
